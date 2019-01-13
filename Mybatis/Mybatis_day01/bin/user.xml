@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<!-- 
+		id:sql语句唯一标识 
+		parameterType:入参的数据类型 
+		resultType:返回的数据类型 
+		#{}:占位符，相当于JDBC的？ 
+	-->
+	<select id="getUserById" parameterType="int" resultType="Pojo.User">
+		select *from user where id=#{suibianxie}
+	</select>
+
+	<select id="getUserByName" parameterType="string" resultType="Pojo.User">
+		select *from user where username like "%"#{suibianxie}"%"
+	</select>
+
+
+	<!-- 插入用户 -->
+	<!-- useGeneratedKeys启动自增，与keyProperty配套使用-->
+	<insert id="insertUser" parameterType="Pojo.User" useGeneratedKeys="true" keyProperty="id" >
+															<!-- 启动自增 -->     <!-- 用id来接受自增 -->
+		insert into user (username,birthday,address,sex) values(#{username},#{birthday},#{address},#{sex})
+	</insert>
+	
+	
+	
+	<update id="updateUser" parameterType="Pojo.User">
+		update user set username =#{username} where id= #{id}
+	</update>
+	
+	
+	<delete id="deleteUser" parameterType="int">
+		DELETE 
+		FROM
+		 `user` 
+		WHERE `id` = #{id} ;
+
+		
+	</delete>
+</mapper>

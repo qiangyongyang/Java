@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+	<!-- 
+		动态代理开发规则：
+		1.namespace必须是接口的全路径名
+		2.接口的方法名必须与sql id一致
+		3.接口的入参必须与parameterType一致
+		4.接口的返回值必须与resultType一致
+ 	-->
+	<select id="getUserById" parameterType="int" resultType="Pojo.User">
+		SELECT
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+		FROM `user`
+		WHERE id = #{id}
+	</select>
+
+	<select id="getUserByName" parameterType="string" resultType="Pojo.User">
+		SELECT
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+		FROM `user`
+		WHERE username like #{name}
+	</select>
+
+
+	<!-- 插入用户 -->
+	<!-- useGeneratedKeys启动自增，与keyProperty配套使用-->
+	<insert id="insert" parameterType="Pojo.User" useGeneratedKeys="true" keyProperty="id" >
+															<!-- 启动自增 -->     <!-- 用id来接受自增 -->
+		INSERT INTO `user`
+		(
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+		)
+		VALUES
+		(
+		#{username},
+		#{birthday},
+		#{sex},
+		#{address}
+		) ;
+	</insert>
+	
+	
+	
+	<update id="updateUser" parameterType="Pojo.User">
+		UPDATE 
+		  `user` 
+		SET
+		  `username` = #{username}
+		WHERE `id` = #{id} ;
+	</update>
+	
+	
+	<delete id="deleteUser" parameterType="int">
+		DELETE 
+		FROM
+		 `user` 
+		WHERE `id` = #{id} ;
+
+		
+	</delete>
+</mapper>

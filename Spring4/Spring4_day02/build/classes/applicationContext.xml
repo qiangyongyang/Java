@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 注解开发，引入context约束 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd"> 
+	
+	<!-- Spring的IOC的注解的入门 -->
+	
+	<!-- 开扫描是在类上加注解 -->
+	<!-- <context:component-scan base-package="spring"/>  -->
+	
+	<!-- 在没有扫描的情况下，使用属性注入的注解-->
+	<context:annotation-config/>
+	
+	<bean id="productService" class="spring.demo3.ProductService">
+		<!-- 属性注入用注解的方式 -->
+	</bean>
+	
+	
+	<bean id="productDao" class="spring.demo3.ProductDao"></bean>
+	<bean id="orderDao" class="spring.demo3.OrderDao"></bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

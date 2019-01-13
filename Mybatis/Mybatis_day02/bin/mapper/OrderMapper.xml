@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mappers namespace="mapper.OrderMapper">
+	<!-- 
+		动态代理开发规则：
+		1.namespace必须是接口的全路径名
+		2.接口的方法名必须与sql id一致
+		3.接口的入参必须与parameterType一致
+		4.接口的返回值必须与resultType一致
+ 	-->
+ 	
+	<select id="getOrderList"  resultType="order">
+		SELECT 
+		  `id`,
+		  `user_id` userId,
+		  `number`,
+		  `createtime`,
+		  `note` 
+		FROM
+		 `order`
+	</select> 
+
+	
+
+	<resultMap type="order" id="order_list_map">
+ 		<result property="userId" column="user_id"/>
+ 	</resultMap>
+ 	
+ 	
+ 	<!-- 使用resultMap，上面是定义 -->
+ 	<select id="getOrderListMap"  resultMap="order_list_map">
+		SELECT 
+		  `id`,
+		  `user_id`,
+		  `number`,
+		  `createtime`,
+		  `note` 
+		FROM
+		 `order`
+	</select>
+	
+	
+	<!-- 查询订单关联用户 ,resultType的使用 -->
+	<select id="getOrderUser" resultType="orderuser">
+		SELECT 
+		  o.`id`,
+		  o.`user_id`,
+		  o.`number`,
+		  o.`createtime`,
+		  o.`note` ,
+		  u.`username`,
+		  u.`address`
+		FROM
+		 `order` o
+		LEFT JOIN `user` u ON u.`id`=o.`user_id`
+	</select>
+	1809741983
+	
+	<resultMap type="order" id="order_user_map">
+		<id property="id"       column="id"/>
+ 		<result property="userId" column="user_id"/>
+ 		<result property="number" column="number"/>
+ 		<result property="createtime" column="createtime"/>
+ 		<result property="note" column="note"/>
+ 		
+ 		<!-- 用于配置一对一关系
+ 			 property：order里的user属性
+ 			 javaType: user的数据类型，支持别名
+ 		 -->
+ 		<association property="user" javaType="Pojo.User">
+ 			<id property="id"       column="user_id"/>
+ 			<result property="username"       column="username"/>
+ 			<result property="address"       column="address"/>
+ 			<result property="birthday"       column="birthday"/>
+ 			<result property="sex"       column="sex"/>
+ 		</association>
+	</resultMap>
+	
+	<!-- 查询订单关联用户 ,resultMap的使用 -->
+	<select id="getOrderUserMap" resultMap="order_user_map">
+		SELECT 
+		  o.`id`,
+		  o.`user_id`,
+		  o.`number`,
+		  o.`createtime`,
+		  o.`note` ,
+		  u.`username`,
+		  u.`address`
+		  u.`birthday`
+		  u.sex
+		FROM
+		 `order` o
+		LEFT JOIN `user` u ON u.`id`=o.`user_id`
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

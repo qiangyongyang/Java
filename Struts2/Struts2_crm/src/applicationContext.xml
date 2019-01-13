@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 配置Service -->
+	<bean id="customerService" class="crm.web.service.impl.CustomerServiceImpl">
+		<!-- 注入DAO的属性 -->
+		<property name="dao" ref="customerDao"/>
+	</bean>
+	
+	<!-- 配置DAO -->
+	<bean id="customerDao" class="crm.web.dao.impl.CustomerDaoImpl"></bean>
+	
+	
+	
+	
+	
+	
+	<bean id="userService" class="crm.web.service.impl.UserServiceImpl">
+		<!-- 注入DAO的属性 -->
+		<property name="dao" ref="userDao"/>
+	</bean>
+	
+	<!-- 配置DAO -->
+	<bean id="userDao" class="crm.web.dao.impl.UserDaoImpl"></bean>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

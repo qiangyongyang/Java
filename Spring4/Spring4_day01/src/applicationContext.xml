@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <!-- Spring入门配置 -->
+    <bean id="userService" class="spring_IOC.UserServiceImpl" scope="prototype">
+    	<property name="name" value="RNG"></property>
+    </bean>
+    
+    <!-- Spring属性注入的方式 -->
+    <!-- 1.构造方法的方式 -->
+    <bean id="car1" class="SpringDemo1.Car1">
+    	<constructor-arg name="name" value="迈巴赫"/>
+    	<constructor-arg name="price" value="100000000"/>
+    </bean>
+ 
+ 	 <!-- 2.set方法的方式 -->
+    <bean id="car2" class="SpringDemo1.Car2">
+    	<property name="name" value="劳斯莱斯"/>
+    	<property name="price" value="80000000"/>
+    </bean>   
+    
+    <!-- set方法注入对象类型的属性 -->
+    <bean id="employee" class="SpringDemo1.Employee">
+    	<!-- value：设置普通类型的值；ref：设置其他类的id或name -->
+    	<property name="name" value="JVM"/>
+    	<property name="car" ref="car1"/>
+    </bean>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Spring的集合属性的注入 -->
+    <!-- 注入数组类型 -->
+    <bean id="collectionBean" class="SpringDemo2.CollectionBean"> 
+    	<!-- 注入数组 -->
+    	<property name="arrs" >
+    		<list>
+    			<value>王炸</value>
+    			<value>闰土</value>
+    			<value>陈翔</value>
+    		</list>
+    	</property>
+    	
+    	<!-- 注入list集合 -->
+    	<property name="list">
+    		<list>
+    			<value>茅台</value>
+    			<value>蘑菇头</value>
+    			<value>球球</value>
+    		</list>
+    	</property>
+    	
+    	
+    	<!-- 注入set集合 -->
+    	<property name="set">
+    		<set>
+    			<value>茅台</value>
+    			<value>蘑菇头</value>
+    			<value>球球</value>
+    		</set>
+    	</property>
+    	
+    	<!-- 注入map集合 -->
+    	<property name="map">
+    		<map>
+    			<entry key="name" value="妹爷"/>
+    			<entry key="age" value="60"/>
+    		</map>
+    	</property>
+    </bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Bean2.Role" table="sys_role">
+		<id name="role_id">
+			<generator class="native"></generator>
+		</id>
+		<property name="role_name" column="role_name"/>
+		<property name="role_memo" column="role_memo"/>
+		
+		<!-- 建立与用户的多对多映射关系 -->
+		<!-- inverse为放弃外键维护 -->
+		<set name="users" table="sys_user_role" cascade="save-update,delete" inverse="true" >
+			<key column="role_id"/>
+			<many-to-many class="Bean2.User" column="user_id"/>
+		</set>
+	</class>
+</hibernate-mapping>

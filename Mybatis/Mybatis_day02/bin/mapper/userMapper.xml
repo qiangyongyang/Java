@@ -1,0 +1,181 @@
+ <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+	<!-- 
+		动态代理开发规则：
+		1.namespace必须是接口的全路径名
+		2.接口的方法名必须与sql id一致
+		3.接口的入参必须与parameterType一致
+		4.接口的返回值必须与resultType一致
+ 	-->
+	<select id="getUserById" parameterType="int" resultType="user">
+		SELECT											<!-- 在sqlmapconfig中配置了别名 -->
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`-
+		FROM `user`
+		WHERE id = #{id}
+	</select>
+
+	<select id="getUserByName" parameterType="string" resultType="Pojo.User">
+		SELECT
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+		FROM `user`
+		WHERE username like #{name}
+	</select>
+
+
+	<!-- 插入用户 -->
+	<!-- useGeneratedKeys启动自增，与keyProperty配套使用-->
+	<insert id="insert" parameterType="Pojo.User" useGeneratedKeys="true" keyProperty="id" >
+															<!-- 启动自增 -->     <!-- 用id来接受自增 -->
+		INSERT INTO `user`
+		(
+		`usern  ame`,
+		`birthday`,
+		`sex`,
+		`address`
+		)
+		VALUES
+		(
+		#{username},
+		#{birthday},
+		#{sex},
+		#{address}
+		) ;
+	</insert>
+	
+	
+	
+	<update id="updateUser" parameterType="Pojo.User">
+		UPDATE 
+		  `user` 
+		SET
+		  `username` = #{username}
+		WHERE `id` = #{id} ;
+	</update>
+	
+	
+	<delete id="deleteUser" parameterType="int">
+		DELETE 
+		FROM
+		 `user` 
+		WHERE `id` = #{id} ;
+	</delete>
+	
+	
+	
+	
+	<!-- 第二天 -->
+	<select id="getUserByQueryVo" parameterType="QueryVo" resultType="Pojo.User">
+		SELECT
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+		FROM `user`
+		WHERE username like '%${user.username}%'
+	</select>
+	
+	
+	<select id="getUserCount" resultType="int">
+		select count(1) from user
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 动态sql -->
+	
+	<!-- sql片段抽取的定义 -->
+	<sql id="user_sql">
+		`id`,
+		`username`,
+		`birthday`,
+		`sex`,
+		`address`
+	</sql>
+	
+	
+	<!-- if标签的使用 -->
+	<select id="getUserByPojo" parameterType="user" resultType="Pojo.User">
+		SELECT
+			<!-- 引用定义好的sql片段 -->
+			<include refid="user_sql"/>
+		FROM `user`
+		WHERE 1=1 
+		<if test="username!=null and username!='' ">
+			and username like '%${usernamre}%'
+		</if>
+		<if test="sex!=null and sex!='' ">
+			and sex =#{sex}
+		</if>	
+	</select>
+	
+	
+	<!-- where标签的使用 -->
+	<select id="getUserByPojo_where" parameterType="user" resultType="Pojo.User">
+		SELECT
+			<include refid="user_sql"/>
+		FROM `user`
+		
+		<!-- where标签自动补上where关键字，同时处理多余的and ，不能手动加where关键字-->
+		<where>
+			<if test="username!=null and username!='' ">
+				and username like '%${usernamre}%'
+			</if>
+			<if test="sex!=null and sex!='' ">
+				and sex =#{sex}
+			</if>
+		</where>	
+	</select>
+	
+	
+	
+	<!-- foreach标签的使用 -->
+	<select id="getUserByIds" parameterType="queryvo" resultType="user">
+		SELECT
+			<include refid="user_sql"></include>
+		FROM `user`
+		<where>
+			<foreach collection="ids" open="id IN(" item="uId" separator="," close=")">
+				#{uId}
+			</foreach>
+		 
+		</where>	
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
