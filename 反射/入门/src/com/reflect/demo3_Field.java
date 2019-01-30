@@ -1,4 +1,4 @@
-package com.reflect;
+﻿package com.reflect;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -9,7 +9,7 @@ public class demo3_Field {
 	
 	
 	/*
-	 * Class.getField(String)方法可以获取类中指定的字段
+	 * Class.getField(String)方法可以获取类中指定的字段：
 	 * 
 	 * 1.如果是私有的，可以用getDeclaedField("name")方法获取，通过set(obj,"李四")方法可以设置指定对象上该字段的值
 	 * 2.如果是私有的，要先调用setAccessible(true)设置访问权限。
