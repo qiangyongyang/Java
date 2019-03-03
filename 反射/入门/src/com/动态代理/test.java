@@ -1,5 +1,7 @@
-package com.动态代理;
-
+﻿package com.动态代理;
+/*
+	Proxy  与 InvocationHandler 做代理类
+*/
 import java.lang.reflect.Proxy;
 
 public class test {
